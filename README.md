@@ -21,6 +21,24 @@ This is a basic web-based game in which users can play the classic game of Rock,
 - The Layout file contains HTML code used by every page and is managed by React Router, rather than wrapping each page individually.
 - Used conditional rendering to display components based on game states.
 
+## Process Flow
+
+```mermaid
+flowchart TD
+    A[Start] --> B{New game or resume game?}
+    B -->C[New game]
+    C --> D{Game mode}
+    D --> E[1 player]
+    D --> F[2 player]
+    E --> G[Enter player details]
+    F --> G
+    G --> H[Select rock, paper or scissors]
+    H --> I[Display game result]
+    I --> H
+    B ----> K[Resume game]
+    K ----> H
+```
+
 ## Future Improvements
 
 - Advanced AI: Improve the computer's logic by learn the patterns of play from the human player.

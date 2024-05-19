@@ -50,7 +50,7 @@ flowchart TD
 - Unit Tests: Add unit tests to ensure the reliability and correctness of the game logic.
 - Game History: keep history of more than one previous state (Display stats of the previous games).
 - Enhanced UI/UX: Add animations and improve the overall look and feel of the game.
-- Round Limit: Set an odd number of rounds to play
+- Round Limit: Set an odd number of rounds to play.
 - Key board shortcut to perform actions like restart.
 - Multiplayer Support: Extend the game to allow players to join from different browsers and play in real-time.
 

@@ -37,6 +37,7 @@ flowchart TD
     I --> H
     B ----> K[Resume game]
     K ----> H
+    I ----> L[End game]
 ```
 
 ## Future Improvements

@@ -73,7 +73,7 @@ git clone https://github.com/AdePhil/rps.git
 Navigate to the project directory:
 
 ```bash
-cd rps-test
+cd rps
 ```
 
 Install dependencies:

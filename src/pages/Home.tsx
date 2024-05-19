@@ -1,8 +1,10 @@
 import { Button } from "@/components";
+import { hasGameHistory } from "@/modules/game/utils";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigation = useNavigate();
+  const showResumeButton = hasGameHistory();
   return (
     <>
       <img
@@ -13,7 +15,14 @@ const Home = () => {
       <Button className="mt-10" onClick={() => navigation("/game")}>
         New Game
       </Button>
-      <Button className="mt-10">Resume Game</Button>
+      {showResumeButton && (
+        <Button
+          className="mt-10"
+          onClick={() => navigation("/game", { state: { resume: true } })}
+        >
+          Resume Game
+        </Button>
+      )}
     </>
   );
 };

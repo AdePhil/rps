@@ -1,24 +1,49 @@
-import { GameMode, GameState, Move, Player } from "@/modules/game/types";
 import {
+  GameHistory,
+  GameMode,
+  GameState,
+  Move,
+  Player,
+} from "@/modules/game/types";
+import {
+  GAME_HISTORY_KEY,
   createPlayer,
   generateComputerChoice,
   getGameResult,
 } from "@/modules/game/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-type Props = {
-  gameMode: GameMode;
-  setGameMode: (mode: GameMode | undefined) => void;
-};
-
-const useRockPaperScissors = ({ gameMode, setGameMode }: Props) => {
+type Props =
+  | {
+      gameMode: GameMode;
+      setGameMode: (mode: GameMode | undefined) => void;
+      resume?: boolean;
+    }
+  | {
+      gameMode?: undefined;
+      setGameMode: (mode: GameMode | undefined) => void;
+      resume: boolean;
+    };
+const useRockPaperScissors = ({ gameMode, setGameMode, resume }: Props) => {
   const [player1, setPlayer1] = useState<Player | null>(null);
   const [player2, setPlayer2] = useState<Player | null>(null);
   const [gameState, setGameState] = useState<GameState>(
     GameState.PlayerDetails
   );
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!resume) return;
+    const history = JSON.parse(
+      localStorage.getItem(GAME_HISTORY_KEY) || "null"
+    ) as GameHistory | null;
+    if (!history) return;
+    setPlayer1(history.player1);
+    setPlayer2(history.player2);
+    setGameState(GameState.Playing);
+    setGameMode(history.gameMode as GameMode);
+  }, []);
 
   const handlePlayerCreation = (name: string) => {
     let firstPlayer = player1;
@@ -39,6 +64,7 @@ const useRockPaperScissors = ({ gameMode, setGameMode }: Props) => {
 
     if (firstPlayer && secondPlayer) {
       setGameState(GameState.Playing);
+      saveGameState({ player1: firstPlayer, player2: secondPlayer });
     }
   };
 
@@ -52,13 +78,15 @@ const useRockPaperScissors = ({ gameMode, setGameMode }: Props) => {
       const computerChoice = generateComputerChoice();
       const computer = { ...player2, choice: computerChoice };
       setPlayer2(computer);
-      updatePlayerScores(currentPlayer, computer);
+      const updatedPlayers = updatePlayerScores(currentPlayer, computer);
+      saveGameState(updatedPlayers);
       setGameState(GameState.Result);
       return;
     }
 
     if (player1?.choice) {
-      updatePlayerScores(player1, currentPlayer);
+      const updatedPlayers = updatePlayerScores(player1, currentPlayer);
+      saveGameState(updatedPlayers);
       setGameState(GameState.Result);
     }
   };
@@ -93,6 +121,17 @@ const useRockPaperScissors = ({ gameMode, setGameMode }: Props) => {
     setPlayer2(null);
     setGameMode(undefined);
     navigate("/game", { state: { resume: false } });
+  };
+
+  const saveGameState = ({
+    player1,
+    player2,
+  }: {
+    player1: Player;
+    player2: Player;
+  }) => {
+    const history = { player1, player2, gameMode };
+    localStorage.setItem(GAME_HISTORY_KEY, JSON.stringify(history));
   };
 
   return {

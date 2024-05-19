@@ -3,6 +3,12 @@ export enum GameMode {
   TWO_PLAYER = 2,
 }
 
+export type GameHistory = {
+  player1: Player;
+  player2: Player;
+  gameMode: GameMode;
+};
+
 export type Player = {
   id: string;
   name: string;

@@ -52,3 +52,8 @@ export const createPlayer = (details: Partial<Player>): Player => {
   const { name = "Computer", isComputer = true } = details;
   return { id: uuidv4(), name, isComputer, score: 0 };
 };
+
+export const hasGameHistory = () => {
+  return !!localStorage.getItem(GAME_HISTORY_KEY);
+};
+export const GAME_HISTORY_KEY = "rps-history";

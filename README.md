@@ -67,7 +67,7 @@ flowchart TD
 Clone Repository:
 
 ```bash
-git clone https://github.com/AdePhil/rps-test.git
+git clone https://github.com/AdePhil/rps.git
 ```
 
 Navigate to the project directory:

@@ -5,11 +5,11 @@ import { useState } from "react";
 const Game = () => {
   const [mode, setMode] = useState<GameMode | undefined>(undefined);
 
-  if (!mode) {
-    return <GameModeSelection setMode={setMode} />;
+  if (mode) {
+    return <GameContent gameMode={mode} setGameMode={setMode} />;
   }
 
-  return <GameContent gameMode={mode} setGameMode={setMode} />;
+  return <GameModeSelection setMode={setMode} />;
 };
 
 export default Game;

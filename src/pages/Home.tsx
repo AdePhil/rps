@@ -1,8 +1,20 @@
+import { Button } from "@/components";
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
+  const navigation = useNavigate();
   return (
-    <div className="bg-primary min-h-screen text-white py-10 px-3">
-      <h1 className="text-3xl text-center">Rock Paper scissors</h1>
-    </div>
+    <>
+      <img
+        className="w-[280px] object-contain my-[40px] rotate-[-20deg]"
+        alt=""
+        src="/rps.png"
+      />
+      <Button className="mt-10" onClick={() => navigation("/game")}>
+        New Game
+      </Button>
+      <Button className="mt-10">Resume Game</Button>
+    </>
   );
 };
 

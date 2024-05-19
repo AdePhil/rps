@@ -1,6 +1,10 @@
+
 # Rock ˣ Paper ˣ Scissors
 
 This is a basic web-based game in which users can play the classic game of Rock, Paper, Scissors versus a computer opponent or another player.
+
+https://github.com/AdePhil/rps/assets/20032671/41c148ff-4e50-42e2-8951-15edfde473de
+
 
 ## Requirements
 
@@ -14,7 +18,7 @@ This is a basic web-based game in which users can play the classic game of Rock,
 
 ## Design Decisions
 
-- In a 1-player mode, the computer acts as player 2 in the. This helps to reuse logic for both 1-player and 2-player game modes.
+- In a 1-player mode, the computer functions as Player 2. This allows for the reuse of logic for both 1-player and 2-player game modes.
 - Local storage is used to store previous game state, including details about the two players and the game mode.
 - Created a custom hook called useRockPaperScissors to manage and colocate game logic, this also keeps most of the components lean.
 - The utility functions in the game modules are pure functions that support logic in the useRockPaperScissors hook, since the don't modify react state or sync data with useEffect.
